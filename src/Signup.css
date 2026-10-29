@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --hu-blue: #003366;       /* Official HU Dark Blue */
+  --hu-gold: #FFCC00;       /* Official HU Gold */
+  --hu-blue-light: #004d99;
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --text-dark: #333;
+  --text-light: #999;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  margin: 0; 
+  padding: 0;
+}
+.signup-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+/* --- Main Split Layout --- */
+.signup-container {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  height: 85vh;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Left Side: Branding --- */
+.signup-brand {
+  flex: 1.2;
+  background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.85)), 
+              url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Hawassa_University_Main_Gate.jpg/1200px-Hawassa_University_Main_Gate.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  position: relative;
+}
+
+/* Gold Circle Decoration */
+.signup-brand::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 204, 0, 0.1);
+  border-radius: 50%;
+}
+
+.hu-logo {
+  width: 130px;
+  height: 130px;
+  background: white;
+  border-radius: 50%;
+  padding: 10px;
+  margin-bottom: 25px;
+  border: 4px solid var(--hu-gold);
+  object-fit: contain;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.signup-brand h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
+.signup-brand h3 { font-size: 1.1rem; color: var(--hu-gold); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+.signup-brand p { opacity: 0.9; line-height: 1.6; max-width: 80%; font-size: 0.95rem; }
+
+/* --- Right Side: Form Container --- */
+.signup-form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  background: #ffffff;
+  overflow-y: auto; /* Enables scrolling for long forms */
+}
+
+/* Scrollbar Styling */
+.signup-form-container::-webkit-scrollbar { width: 8px; }
+.signup-form-container::-webkit-scrollbar-track { background: #f1f1f1; }
+.signup-form-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+.signup-form-container::-webkit-scrollbar-thumb:hover { background: #bbb; }
+
+.signup-card { width: 100%; max-width: 400px; margin: auto; }
+.signup-card h2 { color: var(--hu-blue); font-weight: 700; margin-bottom: 5px; font-size: 1.8rem; }
+.sub-text { color: var(--text-light); font-size: 0.9rem; margin-bottom: 30px; display: block; }
+
+/* --- Inputs & Floating Labels --- */
+.form-group { position: relative; margin-bottom: 20px; }
+.row { display: flex; margin-left: -5px; margin-right: -5px; }
+.row .col-6 { width: 50%; padding: 0 5px; }
+
+.form-control, .form-select {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 0.95rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  transition: all 0.3s;
+  color: var(--text-dark);
+  appearance: none; /* Removes default browser styling */
+  font-family: inherit;
+}
+
+/* Add custom arrow for Select box */
+.form-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23003366' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  cursor: pointer;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--hu-blue);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.1);
+}
+
+.form-label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  transition: 0.3s ease all;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* --- Floating Animation Logic --- */
+/* 1. When input is focused or has text, move label up */
+.form-control:focus ~ .form-label,
+.form-control:not(:placeholder-shown) ~ .form-label {
+  top: -9px;
+  left: 10px;
+  font-size: 0.75rem;
+  color: var(--hu-blue);
+  background: #fff;
+  padding: 0 4px;
+  font-weight: 600;
+  z-index: 10;
+}
+
+/* 2. FORCE label up for Select boxes (Fixes "Register As" overlap) */
+.form-select ~ .form-label {
+  top: -9px;
+  left: 10px;
+  font-size: 0.75rem;
+  color: var(--hu-blue);
+  background: #fff;
+  padding: 0 4px;
+  font-weight: 600;
+  z-index: 10;
+}
+
+/* --- Button Styling --- */
+.btn-signup {
+  width: 100%;
+  padding: 14px;
+  background: var(--hu-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.btn-signup:hover { background: var(--hu-blue-light); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+.btn-signup:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Link Styling */
+.link-text { color: var(--hu-blue); text-decoration: none; font-weight: 600; transition: 0.2s; }
+.link-text:hover { text-decoration: underline; color: var(--hu-blue-light); }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+  .signup-container {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  body { overflow: auto; height: auto; } /* Allow body scroll on mobile */
+  
+  .signup-brand {
+    padding: 40px 20px;
+    flex: none;
+    height: 300px;
+  }
+  .hu-logo { width: 90px; height: 90px; margin-bottom: 15px; }
+  .signup-brand h1 { font-size: 1.8rem; }
+  
+  .signup-form-container {
+    padding: 30px 20px;
+    height: auto;
+    overflow: visible; /* Let page scroll naturally */
+  }
+  @keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+}
